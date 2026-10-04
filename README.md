@@ -99,6 +99,7 @@ clinical-note-intelligence/
 │   └── config.py        # environment settings
 ├── models/              # trained .joblib files (vectorizer + classifier)
 ├── notebooks/clinical_notes_pipeline.ipynb
+├── streamlit_app.py     # Streamlit demo UI
 ├── tests/test_api.py
 ├── Dockerfile
 ├── requirements.txt
@@ -120,6 +121,17 @@ uvicorn app.main:app --reload
 Open **http://localhost:8000/docs** for the interactive Swagger UI.
 
 > The models were pickled with scikit-learn **1.6.1**, so `requirements.txt` pins that exact version.
+
+### Streamlit demo
+
+A web UI that uses the same `app/` package (no API server needed): single-note analysis with a probability chart, structured extraction, batch CSV classification with download, and an about/results tab.
+
+```bash
+pip install -r requirements-streamlit.txt
+streamlit run streamlit_app.py
+```
+
+Paste a Groq key in the sidebar (or set `GROQ_API_KEY` in `.env` / `.streamlit/secrets.toml`) to enable LLM classification and extraction. Without a key it runs on the local model.
 
 ### Docker
 
